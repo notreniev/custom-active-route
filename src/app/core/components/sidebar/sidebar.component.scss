@@ -1,0 +1,14 @@
+li {
+  padding: 1rem;
+  border: solid 1px;
+  list-style: none;
+}
+
+.active-link {
+  padding-right: 0.5rem;
+  border-right: solid 0.5rem red;
+}
+
+a {
+  cursor: pointer;
+}
