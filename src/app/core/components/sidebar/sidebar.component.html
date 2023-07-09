@@ -1,34 +1,10 @@
 <ul>
-  <li>
+  <li *ngFor="let link of links">
     <a
-      (click)="goTo('feature1')"
-      [routerLink]="['feature1']"
-      [ngClass]="{ 'active-link': isActive1 }">
-      Feature 1
-    </a>
-  </li>
-  <li>
-    <a
-      (click)="goTo('feature2')"
-      [routerLink]="['feature2']"
-      [ngClass]="{ 'active-link': isActive2 }">
-      Feature 2
-    </a>
-  </li>
-  <li>
-    <a
-      (click)="goTo('feature3')"
-      [routerLink]="['feature3']"
-      [ngClass]="{ 'active-link': isActive3 }">
-      Feature 3
-    </a>
-  </li>
-  <li>
-    <a
-      (click)="goTo('feature4')"
-      [routerLink]="['feature4']"
-      [ngClass]="{ 'active-link': isActive4 }">
-      Feature 4
+      [routerLink]="link.path"
+      [ngClass]="{ 'active-link-green': link.active }"
+      (click)="go(link.path)">
+      {{ link.path }}
     </a>
   </li>
 </ul>

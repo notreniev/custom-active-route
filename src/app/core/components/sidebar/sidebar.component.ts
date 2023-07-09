@@ -1,11 +1,6 @@
-import {
-  AfterContentInit,
-  AfterViewInit,
-  Component,
-  OnInit,
-} from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { ActivatedRoute, Router, RouterLink } from '@angular/router'
+import { RouterLink } from '@angular/router'
 
 @Component({
   selector: 'app-sidebar',
@@ -21,32 +16,23 @@ export class SidebarComponent implements OnInit {
     { path: 'feature3', active: false },
     { path: 'feature4', active: false },
   ]
-  public isActive1!: boolean
-  public isActive2!: boolean
-  public isActive3!: boolean
-  public isActive4!: boolean
-
-  constructor(
-    protected router: Router,
-    protected activatedRoute: ActivatedRoute
-  ) {}
 
   ngOnInit(): void {
-    this.setCurrent()
+    this.setDefaultMarker()
   }
 
-  goTo(route: string): void {
-    this.setCurrent(route)
+  go(route: string): void {
+    this.links.forEach((link) =>
+      link.path === route ? (link.active = !link.active) : (link.active = false)
+    )
   }
 
-  setCurrent(current?: string): void {
+  setDefaultMarker(current?: string): void {
     if (!current) {
       const parts = window.location.href.split('/')
       current = parts[parts.length - 1]
     }
-    this.isActive1 = current === 'feature1' || current === ''
-    this.isActive2 = current === 'feature2'
-    this.isActive3 = current === 'feature3'
-    this.isActive4 = current === 'feature4'
+
+    this.go(current)
   }
 }
