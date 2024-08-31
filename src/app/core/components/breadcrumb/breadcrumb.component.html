@@ -1,0 +1,5 @@
+<div *ngIf="breadcrumbs$ | async as breadcrumbs">
+  @for (breadcrumb of breadcrumbs; track $index){
+  {{ breadcrumb.label }}
+  }
+</div>
