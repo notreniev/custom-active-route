@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable, signal } from '@angular/core'
 import { BreadCrumb } from '../components/breadcrumb/models/breadcrumb.model'
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router'
 import { BehaviorSubject, filter } from 'rxjs'
@@ -8,8 +8,8 @@ import { BehaviorSubject, filter } from 'rxjs'
 })
 export class BreadcrumbService {
   private breadcrumbs: BreadCrumb[] = []
-  private breadcrumbsSubject = new BehaviorSubject<BreadCrumb[]>([])
-  public breadcrumbsObservable = this.breadcrumbsSubject.asObservable()
+  // private breadcrumbsSignal = writeableSignal<BreadCrumb[]>([]) //new BehaviorSubject<BreadCrumb[]>([])
+  public breadcrumbsSignal = signal<BreadCrumb[]>([])
 
   constructor(
     private router: Router,
@@ -18,7 +18,7 @@ export class BreadcrumbService {
     this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
       this.breadcrumbs = this.createBreadcrumbs(this.activatedRoute.root)
 
-      this.breadcrumbsSubject.next(this.breadcrumbs)
+      this.breadcrumbsSignal.set(this.breadcrumbs)
     })
   }
 

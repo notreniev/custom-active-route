@@ -2,7 +2,8 @@ import { importProvidersFrom } from '@angular/core'
 import { AppComponent } from './app/app.component'
 import { AppRoutingModule } from './app/app-routing.module'
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser'
+import { IxModule } from '@siemens/ix-angular'
 
 bootstrapApplication(AppComponent, {
-  providers: [importProvidersFrom(BrowserModule, AppRoutingModule)],
+  providers: [importProvidersFrom(BrowserModule, AppRoutingModule, IxModule.forRoot())],
 }).catch((err) => console.error(err))

@@ -1,27 +1,18 @@
-import { Component, inject, OnInit } from '@angular/core'
-import { routes } from '../../../app-routing.module'
-import { CommonModule } from '@angular/common'
-import { ActivatedRoute, Router } from '@angular/router'
+import { Component, computed, inject } from '@angular/core'
+import { CommonModule, TitleCasePipe } from '@angular/common'
+import { RouterLink } from '@angular/router'
 import { BreadcrumbService } from '../../services/breadcrumb.service'
-import { Observable, tap } from 'rxjs'
-import { BreadCrumb } from './models/breadcrumb.model'
+import { IxModule } from '@siemens/ix-angular'
 
 @Component({
   selector: 'app-breadcrumb',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TitleCasePipe, IxModule, RouterLink],
   templateUrl: './breadcrumb.component.html',
   styleUrl: './breadcrumb.component.scss',
 })
-export class BreadcrumbComponent implements OnInit {
+export class BreadcrumbComponent {
   protected readonly breadcrumbsService = inject(BreadcrumbService)
 
-  breadcrumbs$ = new Observable<BreadCrumb[]>()
-
-  ngOnInit(): void {
-    this.breadcrumbs$ = this.breadcrumbsService.breadcrumbsObservable.pipe(
-      tap(console.log)
-    )
-    console.log('current:')
-  }
+  breadcrumbs = computed(() => this.breadcrumbsService.breadcrumbsSignal())
 }

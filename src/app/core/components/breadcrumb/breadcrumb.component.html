@@ -1,5 +1,5 @@
-<div *ngIf="breadcrumbs$ | async as breadcrumbs">
+<ix-breadcrumb *ngIf="breadcrumbs() as breadcrumbs" style="padding: 1rem">
   @for (breadcrumb of breadcrumbs; track $index){
-  {{ breadcrumb.label }}
+  <ix-breadcrumb-item label="{{ breadcrumb.label }}" routerLink="{{ breadcrumb.url }}"></ix-breadcrumb-item>
   }
-</div>
+</ix-breadcrumb>
