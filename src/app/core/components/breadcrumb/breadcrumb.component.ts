@@ -15,4 +15,8 @@ export class BreadcrumbComponent {
   protected readonly breadcrumbsService = inject(BreadcrumbService)
 
   breadcrumbs = computed(() => this.breadcrumbsService.breadcrumbsSignal())
+
+  constructor() {
+    console.log('breadcrumbs signal:', this.breadcrumbs())
+  }
 }
