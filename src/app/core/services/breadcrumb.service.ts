@@ -1,20 +1,23 @@
 import { Injectable, signal } from '@angular/core'
 import { BreadCrumb } from '../components/breadcrumb/models/breadcrumb.model'
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router'
-import { BehaviorSubject, filter } from 'rxjs'
+import { filter, firstValueFrom } from 'rxjs'
+import { BaseApiService } from './base-api.service'
+import { HttpClient } from '@angular/common/http'
 
 @Injectable({
   providedIn: 'root',
 })
-export class BreadcrumbService {
+export class BreadcrumbService extends BaseApiService<BreadCrumb> {
   private breadcrumbs: BreadCrumb[] = []
-  // private breadcrumbsSignal = writeableSignal<BreadCrumb[]>([]) //new BehaviorSubject<BreadCrumb[]>([])
   public breadcrumbsSignal = signal<BreadCrumb[]>([])
 
   constructor(
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    protected override http: HttpClient
   ) {
+    super(http)
     this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
       this.breadcrumbs = this.createBreadcrumbs(this.activatedRoute.root)
 
@@ -22,8 +25,14 @@ export class BreadcrumbService {
     })
   }
 
+  async getBreadcrumb(): Promise<BreadCrumb> {
+    return firstValueFrom(this.get())
+  }
+
   private createBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: BreadCrumb[] = []): BreadCrumb[] {
     const children: ActivatedRoute[] = route.children
+
+    console.log(`getAll(): `, this.getBreadcrumb())
 
     if (children.length === 0) {
       return breadcrumbs
