@@ -7,12 +7,12 @@ export const featureRoutes: Routes = [
   {
     path: 'feature1a',
     data: { title: 'feature1', breadcrumb: 'feature1a' },
-    loadComponent: () => import('./feature1/feature1a/feature1a.component').then((c) => c.Feature1aComponent),
+    loadComponent: () => import('./feature1a/feature1a.component').then((c) => c.Feature1aComponent),
   },
   {
     path: 'feature2a',
     data: { title: 'feature2', breadcrumb: 'feature2a' },
-    loadComponent: () => import('./feature2/feature2a/feature2a.component').then((c) => c.Feature2aComponent),
+    loadComponent: () => import('./../feature2/feature2.component').then((c) => c.Feature2Component),
   },
 ]
 

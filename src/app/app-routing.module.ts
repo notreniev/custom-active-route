@@ -1,5 +1,5 @@
-import { InjectionToken, NgModule } from '@angular/core'
-import { RouterModule, Routes } from '@angular/router'
+import { InjectionToken } from '@angular/core'
+import { Routes } from '@angular/router'
 import { NotFoundComponent } from './core/components/not-found/not-found.component'
 
 export const externalUrlProvider = new InjectionToken('externalUrlRedirectResolver')
@@ -8,7 +8,7 @@ export const routes: Routes = [
   {
     path: 'feature1',
     data: { title: 'feature1', breadcrumb: 'feature1' },
-    loadChildren: () => import('./features/feature1-routing.module').then((c) => c.featureRoutes),
+    loadChildren: () => import('./features/feature1/feature1-routing.module').then((c) => c.featureRoutes),
   },
   {
     path: 'feature2',
@@ -36,9 +36,3 @@ export const routes: Routes = [
   },
   { path: '**', redirectTo: '/not-found', pathMatch: 'full' },
 ]
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}

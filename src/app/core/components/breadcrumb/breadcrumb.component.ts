@@ -1,7 +1,7 @@
 import { Component, computed, inject } from '@angular/core'
 import { CommonModule, TitleCasePipe } from '@angular/common'
 import { RouterLink } from '@angular/router'
-import { BreadcrumbService } from '../../services/breadcrumb.service'
+import { BreadcrumbService } from './services/breadcrumb.service'
 import { IxModule } from '@siemens/ix-angular'
 
 @Component({

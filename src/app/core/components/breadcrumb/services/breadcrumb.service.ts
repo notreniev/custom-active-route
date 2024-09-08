@@ -1,8 +1,8 @@
 import { computed, Injectable, signal } from '@angular/core'
-import { BreadCrumb } from '../components/breadcrumb/models/breadcrumb.model'
+import { BreadCrumb } from '../models/breadcrumb.model'
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router'
 import { filter, firstValueFrom } from 'rxjs'
-import { BaseApiService } from './base-api.service'
+import { BaseApiService } from '../../../abstract/base-api.service'
 import { HttpClient } from '@angular/common/http'
 
 @Injectable({
